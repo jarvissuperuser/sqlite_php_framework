@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS `user_details`;
 DROP TABLE IF EXISTS `institution`;
 DROP TABLE IF EXISTS `user_relationship`;
 DROP VIEW IF EXISTS user_list;
+DROP VIEW IF EXISTS profile_list;
 -- SET FOREIGN_KEY_CHECKS = 1;
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -53,7 +54,20 @@ CREATE TABLE IF NOT EXISTS `user_relationship` (
 UPDATE sqlite_sequence set seq = 1;
 
 CREATE VIEW user_list AS
-SELECT  u.`name` || " " || u.`middle_name`|| " "|| u.`surname` AS fullname
-,u.`type`,u.`flag`
-,ud.`id` as udid, ud.`uid`,ud.`date_of_birth`,ud.`national_id`, ud.`nationality`,ud.`gender`,ud.`flag`
-,ud.`cell`,ud.`tel`,ud.`email`,ud.`password` FROM `user` u, `user_details` ud WHERE u.id = ud.uid
+SELECT  
+	u.`name` || " " || u.`middle_name`|| " "|| u.`surname` AS fullname
+	,u.`type`,u.`flag`
+	,ud.`id` as udid, ud.`uid`,ud.`date_of_birth`,ud.`national_id`, ud.`nationality`,ud.`gender`,ud.`flag`
+	,ud.`cell`,ud.`tel`,ud.`email`,ud.`password` 
+FROM `user` u, `user_details` ud WHERE u.id = ud.uid
+
+CREATE VIEW profile_list AS 
+SELECT 
+	usp.`type`,usp.`uid`, 
+	IFNULL(usp.`institution`,"NOT SET") usp.`institution` AS  SCHOOL,
+	ur.`relationship`
+FROM 
+	user_profile usp, user_relationship ur 
+WHERE
+	ur.`uid1` = usp.`uid` OR
+	ur.`uid2` = usp.`uid`
