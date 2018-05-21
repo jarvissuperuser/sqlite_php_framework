@@ -52,5 +52,10 @@ class Controller
 		}
 		return $what;
 	}
+	public static function input($var,$default,$type){
+		return  (filter_input(INPUT_POST,$var,$type)!=""or
+		filter_input(INPUT_POST,$var,$type)!=null)
+		?filter_input(INPUT_POST,$var,$type):$default;
+	}
 
 }

@@ -58,33 +58,29 @@ class User extends BaseModel
 	 */
 	public function update($table_pointer)
 	{
-		// TODO: implement here
+		// TODO: TestCases
 
 		$setCol = Controller::setCols($this->cols[$table_pointer]);
 		$values = Controller::valuesToString($setCol);
-		$id = filter_input(INPUT_POST,"userid");
+		$id = filter_input(INPUT_POST,"userid",FILTER_SANITIZE_NUMBER_INT);
 		if (sizeof($setCol)==0)throw new Exception("No data Set");
 		$qry = QueryBuild::update($this->tbls[$table_pointer],$values,"id=$id");
 		$this->db->transaction($qry)->execute();
-		echo ["message"=>"details updated","success"=>true];
+		return ["message"=>"details updated","success"=>true];
 	}
 
 	public function update_all(){
 		$this->update(0);
 		$results = $this->update(1);
-		return json_encode($results);
+		echo json_encode([$results]);
 
 	}
 
 	public function search(){
 		$p = filter_input(INPUT_POST,"query");
 		$tp = filter_input(INPUT_POST,"type");
-		$start = (filter_input(INPUT_POST,"start",FILTER_SANITIZE_NUMBER_INT)!=""or
-		filter_input(INPUT_POST,"start",FILTER_SANITIZE_NUMBER_INT)!=null)
-		?filter_input(INPUT_POST,"start",FILTER_SANITIZE_NUMBER_INT):0;
-		$limit = (filter_input(INPUT_POST,"limit",FILTER_SANITIZE_NUMBER_INT)!=""or
-			filter_input(INPUT_POST,"limit",FILTER_SANITIZE_NUMBER_INT)!=null)
-			?filter_input(INPUT_POST,"limit",FILTER_SANITIZE_NUMBER_INT):10;
+		$start = Controller::input("start",0,FILTER_SANITIZE_NUMBER_INT);
+		$limit = Controller::input("limit",10,FILTER_SANITIZE_NUMBER_INT);
 		$what = "(fullname LIKE '%$p%') AND type='$tp' ";
 		$data = $this->get_from_db($what, $start, $limit,2);
 		$final = [];
