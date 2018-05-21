@@ -6,9 +6,12 @@
  * Time: 3:10 PM
  */
 require_once "init.php";
-$db = new QueryBuild();
-$u = new User($db);
-try {
+
+try 
+{
+	$db = new QueryBuild();
+	$u = new User($db);
+	$p = new Profile($db);
 	switch (trim(filter_input(INPUT_POST, "submit"))) {
 		case 'add_user':
 			$u->add();
@@ -19,10 +22,13 @@ try {
 		case "get_user":
 			$u->get();
 			break;
-//		case "get_users":
-//			$u->get_all($pointer);
-//			break;
-		case "update_user":
+		case "add_profile":
+			$p->app();
+			break;
+		case "get_profile":
+			$p->get();
+			break;
+		case "update":
 			$u->update_all();
 			break;
 //		case "login":
