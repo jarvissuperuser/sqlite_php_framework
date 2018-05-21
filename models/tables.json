@@ -1,0 +1,9 @@
+[
+  {
+    "user":["id","name","middle_name","surname","type","flag"],
+    "user_profile":["id","type","uid","institution"],
+    "user_details":["id","uid","date_of_birth","national_id","nationality","gender","flag","cell","tel","email","password"],
+    "institution":["id","name","idid"],
+    "user_relationship":["uid1","uid2","relationship","id"]
+  }
+]
