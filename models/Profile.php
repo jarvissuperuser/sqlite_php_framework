@@ -56,8 +56,8 @@ class Profile extends BaseModel
 
 		$setCol = Controller::setCols($this->cols[$table_pointer]);
 		$values = Controller::valuesToString($setCol);
-		$id = filter_input(INPUT_POST,"userid",FILTER_SANITIZE_NUMBER_INT);
-		if (sizeof($setCol)==0)throw new Exception("No data Set");
+		$id = filter_input(INPUT_POST,"profileid",FILTER_SANITIZE_NUMBER_INT);
+		if (sizeof($setCol)==0)throw new Exception("No data to Set");
 		$qry = QueryBuild::update($this->tbls[$table_pointer],$values,"id=$id");
 		$this->db->transaction($qry)->execute();
 		return ["message"=>"details updated","success"=>true];
@@ -71,7 +71,7 @@ class Profile extends BaseModel
 	}
 
 	public function search(){
-		$p = filter_input(INPUT_POST,"query");
+		/*$p = filter_input(INPUT_POST,"query");
 		$tp = filter_input(INPUT_POST,"type");
 		$start = Controller::input("start",0,FILTER_SANITIZE_NUMBER_INT);
 		$limit = Controller::input("limit",10,FILTER_SANITIZE_NUMBER_INT);
@@ -82,7 +82,7 @@ class Profile extends BaseModel
 			$record['pass_key'] = "*";
 			array_push($final,$record);
 		}
-		echo json_encode($final);
+		echo json_encode($final);*/
 	}
 
 	/**

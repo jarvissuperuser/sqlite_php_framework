@@ -1,7 +1,7 @@
 <?php
 //require_once "classes/controller.php";
 
-$ctrl = ["model","User","Controller"];
+$ctrl = ["model","User","Controller","Profile"];
 foreach ($ctrl as $take)
 {
 	require_once "./models/$take.php";
