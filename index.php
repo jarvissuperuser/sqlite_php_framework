@@ -12,7 +12,6 @@ try
 	$db = new QueryBuild();
 	$u = new User($db);
 	$p = new Profile($db);
-	//filter_input(INPUT_POST, "submit")
 	switch (trim(filter_input(INPUT_POST, "submit"))) {
 		case "add_user":
 			$u->add();
@@ -32,13 +31,8 @@ try
 		case "update":
 			$u->update_all();
 			break;
-//		case "login":
-//		case "sign_in":
-//			$u->login();
-//			break;
 		default:
 			echo '["nada"]';
-//		 $this->process_survey($pointer);
 	}
 } catch (Exception $exc){
 	switch(trim(filter_input(INPUT_POST,"debug"))){
