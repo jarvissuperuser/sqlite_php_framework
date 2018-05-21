@@ -15,26 +15,21 @@ class Profile extends BaseModel
 	{
 		$this->db = $db;
 		$this->tbls = ["user_profile","user_relationship"];
-		$this->cols = [["id","type","uid","institution"],
-			["uid1","uid2","relationship","id"]];
+		$this->cols = [["type","uid","institution"],
+			["uid1","uid2","relationship"]];
 	}
 	public function add()
 	{
 		// TODO: test Cases
 		$db = $this->db;
-		$user_reg = $this->record_check(1,"email");
-		if ($user_reg[0]>0) throw new Exception("User Exists");
 		$vls = Controller::valuate([],$this->cols[0]);
 		$vls2 = Controller::valuate([],$this->cols[1]);
-		$vls2[sizeof($vls2) - 1] = hash("SHA256", filter_input(INPUT_POST,"password",
-			FILTER_SANITIZE_SPECIAL_CHARS));
 		if ($this->add_to_db($vls,0)) {
-			$vls2[0] = $db->db->lastInsertId("id");
 			$this->add_to_db($vls2, 1);
 			array_pop($vls2);
 			echo json_encode([$vls, $vls2]);
 		} else{
-			echo json_encode(["error"=>"failed user add"]);
+			echo json_encode(["error"=>"failed user_profile add"]);
 		}
 	}
 
@@ -44,8 +39,8 @@ class Profile extends BaseModel
 	public function get()
 	{
 		// TODO: Test Cases
-		$pntr = filter_input(INPUT_POST,"userid");
-		$what = "id=$pntr";
+		$pntr = filter_input(INPUT_POST,"profileid");
+		$what = "uid=$pntr";
 		$data=$this->get_from_db($what,0,1,0);
 		echo json_encode($data);
 	}
