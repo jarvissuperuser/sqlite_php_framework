@@ -67,8 +67,8 @@ WHERE
 
 CREATE VIEW profile_list AS 
 SELECT 
-	usp.`type`, usp.`uid`, usp.`id` AS profileid, ur.`id as relate_id,  
-	usp.`institution` AS  school , ur.`relationship`
+	usp.`type`, usp.`uid`, usp.`id` AS profileid, ur.`id` as relate_id,  
+	usp.`institution` AS school , ur.`relationship`
 FROM 
 	user_profile usp, user_relationship ur 
 WHERE
