@@ -12,8 +12,9 @@ try
 	$db = new QueryBuild();
 	$u = new User($db);
 	$p = new Profile($db);
-	switch (trim(filter_input(INPUT_POST, "submit"))) {
-		case 'add_user':
+	//filter_input(INPUT_POST, "submit")
+	switch (trim(filter_input(INPUT_SERVER, "REQUEST__METHOD"))) {
+		case 'PUT':
 			$u->add();
 			break;
 		case "search":
