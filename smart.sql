@@ -60,15 +60,17 @@ SELECT
 	ud.`id` as udid, ud.`uid`,ud.`date_of_birth`,
 	ud.`national_id`, ud.`nationality`,ud.`gender`,ud.`flag`,
 	ud.`cell`,ud.`tel`,ud.`email`,ud.`password` as pass_key 
-FROM `user` u, `user_details` ud WHERE u.id = ud.uid
+FROM 
+	`user` u, `user_details` ud 
+WHERE 
+	u.id = ud.uid;
 
 CREATE VIEW profile_list AS 
 SELECT 
 	usp.`type`, usp.`uid`, usp.`id` AS profileid, ur.`id as relate_id,  
-	IFNULL(usp.`institution`,"NOT SET") usp.`institution` AS  SCHOOL,
-	ur.`relationship`
+	usp.`institution` AS  SCHOOL, ur.`relationship`
 FROM 
 	user_profile usp, user_relationship ur 
 WHERE
 	ur.`uid1` = usp.`uid` OR
-	ur.`uid2` = usp.`uid`
+	ur.`uid2` = usp.`uid`;
