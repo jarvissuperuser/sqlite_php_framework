@@ -13,8 +13,8 @@ try
 	$u = new User($db);
 	$p = new Profile($db);
 	//filter_input(INPUT_POST, "submit")
-	switch (trim(filter_input(INPUT_SERVER, "REQUEST__METHOD"))) {
-		case 'PUT':
+	switch (trim(filter_input(INPUT_POST, "submit"))) {
+		case "add_user":
 			$u->add();
 			break;
 		case "search":
