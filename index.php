@@ -12,7 +12,7 @@ try
 	$db = new QueryBuild();
 	$u = new User($db);
 	$p = new Profile($db);
-	switch (trim(filter_input(INPUT_POST, "submit"))) {
+	switch (trim(filter_input(INPUT_SERVER, "serve"))) {
 		case 'add_user':
 			$u->add();
 			break;
