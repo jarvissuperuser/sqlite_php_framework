@@ -22,9 +22,9 @@ try {
 //		case "get_users":
 //			$u->get_all($pointer);
 //			break;
-//		case "update_user":
-//			$u->update($pointer);
-//			break;
+		case "update_user":
+			$u->update_all();
+			break;
 //		case "login":
 //		case "sign_in":
 //			$u->login();
@@ -34,5 +34,11 @@ try {
 //		 $this->process_survey($pointer);
 	}
 } catch (Exception $exc){
-	echo json_encode(["Error"=>$exc->getTraceAsString()]);
+	switch(trim(filter_input(INPUT_POST,"debug"))){
+		case '1':
+			echo json_encode(["Error"=>$exc->getTraceAsString()]);
+			break;
+		default:
+			echo json_encode(["Error"=>$exc->getMessage()]);
+	}
 }

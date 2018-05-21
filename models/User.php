@@ -48,7 +48,7 @@ class User extends BaseModel
 		$pntr = filter_input(INPUT_POST,"userid");
 		$what = "id=$pntr";
 		$data=$this->get_from_db($what,0,1,0);
-		echo json_encode([$data]);
+		echo json_encode($data);
 	}
 
 	/**
@@ -67,6 +67,13 @@ class User extends BaseModel
 		$qry = QueryBuild::update($this->tbls[$table_pointer],$values,"id=$id");
 		$this->db->transaction($qry)->execute();
 		echo ["message"=>"details updated","success"=>true];
+	}
+
+	public function update_all(){
+		$this->update(0);
+		$results = $this->update(1);
+		return json_encode($results);
+
 	}
 
 	public function search(){
