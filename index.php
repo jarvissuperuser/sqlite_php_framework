@@ -38,10 +38,10 @@ try
 catch (PDOException $pe){
 	switch(trim(filter_input(INPUT_POST,"debug"))){
 		case '1':
-			echo json_encode(["Error"=>$exc->getTraceAsString()]);
+			echo json_encode(["Error"=>$pe->getTraceAsString(),]);
 			break;
 		default:
-			echo json_encode(["Error"=>"Request Failed",filter_input(INPUT_ENV,'variable_key')]);
+			echo json_encode(["Error"=>"Request Failed"]);
 	}
 } 
 catch (Exception $exc){
@@ -50,6 +50,6 @@ catch (Exception $exc){
 			echo json_encode(["Error"=>$exc->getTraceAsString()]);
 			break;
 		default:
-			echo json_encode(["Error"=>$exc->getMessage(),filter_input(INPUT_ENV,'variable_key')]);
+			echo json_encode(["Error"=>$exc->getMessage();
 	}
 }
