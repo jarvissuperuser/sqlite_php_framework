@@ -34,7 +34,17 @@ try
 		default:
 			echo '["nada"]';
 	}
-} catch (Exception $exc){
+}
+catch (PDOException $pe){
+	switch(trim(filter_input(INPUT_POST,"debug"))){
+		case '1':
+			echo json_encode(["Error"=>$exc->getTraceAsString()]);
+			break;
+		default:
+			echo json_encode(["Error"=>"Request Failed",filter_input(INPUT_ENV,'variable_key')]);
+	}
+} 
+catch (Exception $exc){
 	switch(trim(filter_input(INPUT_POST,"debug"))){
 		case '1':
 			echo json_encode(["Error"=>$exc->getTraceAsString()]);
