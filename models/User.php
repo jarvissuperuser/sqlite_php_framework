@@ -78,7 +78,7 @@ class User extends BaseModel
 		$limit = (filter_input(INPUT_POST,"limit",FILTER_SANITIZE_NUMBER_INT)!=""or
 			filter_input(INPUT_POST,"limit",FILTER_SANITIZE_NUMBER_INT)!=null)
 			?filter_input(INPUT_POST,"limit",FILTER_SANITIZE_NUMBER_INT):10;
-		$what = "(fullname LIKE '%$p%') AND type='$tp'";
+		$what = "(fullname LIKE '%$p%') AND type='$tp' ";
 		$data = $this->get_from_db($what, $start, $limit,2);
 		$final = [];
 		foreach ($data  as $record){

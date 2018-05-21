@@ -9,7 +9,7 @@ require_once "init.php";
 $db = new QueryBuild();
 $u = new User($db);
 try {
-	switch (filter_input(INPUT_POST, "submit")) {
+	switch (trim(filter_input(INPUT_POST, "submit"))) {
 		case 'add_user':
 			$u->add();
 			break;
@@ -34,5 +34,5 @@ try {
 //		 $this->process_survey($pointer);
 	}
 } catch (Exception $exc){
-	echo json_encode(["Error"=>$exc->getMessage()]);
+	echo json_encode(["Error"=>$exc->getTraceAsString()]);
 }
