@@ -45,6 +45,6 @@ try
 			echo json_encode(["Error"=>$exc->getTraceAsString()]);
 			break;
 		default:
-			echo json_encode(["Error"=>$exc->getMessage()]);
+			echo json_encode(["Error"=>$exc->getMessage(),filter_input(INPUT_SERVER,'variable_key')]);
 	}
 }
