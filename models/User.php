@@ -86,6 +86,7 @@ class User extends BaseModel
 		$final = [];
 		foreach ($data  as $record){
 			$record['password'] = "*";
+			$record['pass_key'] = "*";
 			array_push($final,$record);
 		}
 		echo json_encode($final);
