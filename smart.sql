@@ -55,15 +55,16 @@ UPDATE sqlite_sequence set seq = 1;
 
 CREATE VIEW user_list AS
 SELECT  
-	u.`name` || " " || u.`middle_name`|| " "|| u.`surname` AS fullname
-	,u.`type`,u.`flag`
-	,ud.`id` as udid, ud.`uid`,ud.`date_of_birth`,ud.`national_id`, ud.`nationality`,ud.`gender`,ud.`flag`
-	,ud.`cell`,ud.`tel`,ud.`email`,ud.`password` 
+	u.`name` || " " || u.`middle_name`|| " "|| u.`surname` AS fullname,
+	u.`type`,u.`flag`,
+	ud.`id` as udid, ud.`uid`,ud.`date_of_birth`,
+	ud.`national_id`, ud.`nationality`,ud.`gender`,ud.`flag`,
+	ud.`cell`,ud.`tel`,ud.`email`,ud.`password` as pass_key 
 FROM `user` u, `user_details` ud WHERE u.id = ud.uid
 
 CREATE VIEW profile_list AS 
 SELECT 
-	usp.`type`,usp.`uid`, 
+	usp.`type`, usp.`uid`, usp.`id` AS profileid, ur.`id as relate_id,  
 	IFNULL(usp.`institution`,"NOT SET") usp.`institution` AS  SCHOOL,
 	ur.`relationship`
 FROM 

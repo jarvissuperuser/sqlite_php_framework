@@ -79,7 +79,7 @@ class Profile extends BaseModel
 		$data = $this->get_from_db($what, $start, $limit,2);
 		$final = [];
 		foreach ($data  as $record){
-			$record['password'] = "*";
+			$record['pass_key'] = "*";
 			array_push($final,$record);
 		}
 		echo json_encode($final);
