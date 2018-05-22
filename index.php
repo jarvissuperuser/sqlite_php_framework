@@ -38,7 +38,7 @@ try
 catch (PDOException $pe){
 	switch(trim(filter_input(INPUT_POST,"debug"))){
 		case '1':
-			echo json_encode(["Error"=>$pe->getTraceAsString(),]);
+			echo json_encode(["Error"=>$pe->getTraceAsString(),$pe->getTrace()]);
 			break;
 		default:
 			echo json_encode(["Error"=>"Request Failed"]);
