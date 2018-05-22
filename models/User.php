@@ -18,7 +18,7 @@ class User extends BaseModel
 		$this->cols = [["name","middle_name","surname","type","flag"],
 			["uid","date_of_birth","national_id",
 			"nationality","gender","flag","cell","tel","email","password"]];
-		$this->muted["password","pass_key"]
+		$this->muted = ["password","pass_key"];
 	}
 	public function add()
 	{
