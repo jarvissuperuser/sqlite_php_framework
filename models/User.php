@@ -18,6 +18,7 @@ class User extends BaseModel
 		$this->cols = [["name","middle_name","surname","type","flag"],
 			["uid","date_of_birth","national_id",
 			"nationality","gender","flag","cell","tel","email","password"]];
+		$this->muted["password","pass_key"]
 	}
 	public function add()
 	{
@@ -83,13 +84,8 @@ class User extends BaseModel
 		$limit = Controller::input("limit",10,FILTER_SANITIZE_NUMBER_INT);
 		$what = "(fullname LIKE '%$p%') AND type='$tp' ";
 		$data = $this->get_from_db($what, $start, $limit,2);
-		$final = [];
-		foreach ($data  as $record){
-			$record['password'] = "*";
-			$record['pass_key'] = "*";
-			array_push($final,$record);
-		}
-		echo json_encode($final);
+		$this->mute($data);
+		echo json_encode($data);
 	}
 
 	/**
