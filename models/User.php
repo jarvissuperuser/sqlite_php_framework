@@ -60,8 +60,8 @@ class User extends BaseModel
 	public function update($table_pointer)
 	{
 		// TODO: TestCases
-
-		$setCol = Controller::setCols($this->cols[$table_pointer]);
+		$cols = $this->silence($this->cols[$table_pointer]);
+		$setCol = Controller::setCols($cols[$table_pointer]);
 		$values = Controller::valuesToString($setCol);
 		$id = filter_input(INPUT_POST,"userid",FILTER_SANITIZE_NUMBER_INT);
 		if (sizeof($setCol)==0)throw new Exception("No data Set");
