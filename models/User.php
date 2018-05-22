@@ -84,11 +84,7 @@ class User extends BaseModel
 		$limit = Controller::input("limit",10,FILTER_SANITIZE_NUMBER_INT);
 		$what = "(fullname LIKE '%$p%') AND type='$tp' ";
 		$data = $this->get_from_db($what, $start, $limit,2);
-		$final = [];
-		foreach ($data as $d){
-			$this->mute($d);
-			array_push($final,$d);
-		}
+		$final = $this->muter($data);
 		echo json_encode($final);
 	}
 
@@ -109,7 +105,13 @@ class User extends BaseModel
 		// TODO: implement here
 	}
 
-
-
+	private function muter($arr){
+		$final = [];
+		foreach ($arr as $d){
+			$this->mute($d);
+			array_push($final,$d);
+		}
+		return $final;
+	}
 
 }
