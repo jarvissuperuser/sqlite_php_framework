@@ -71,8 +71,9 @@ class BaseModel {
 	}
 	
 	protected function mute(&$arr){
-		foreach($this->muted as $d)
-			$arr[$d] = "";
+		foreach ($arr as $a)
+			foreach($this->muted as $d)
+				$a[$d] = "";
 	}
 	
 	protected function silence($arr){
