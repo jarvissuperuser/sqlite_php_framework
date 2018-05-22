@@ -62,7 +62,7 @@ class User extends BaseModel
 	{
 		// TODO: TestCases
 		$cols = $this->silence($this->cols[$table_pointer]);
-		$setCol = Controller::setCols($cols[$table_pointer]);
+		$setCol = Controller::setCols($cols);
 		$values = Controller::valuesToString($setCol);
 		$id = filter_input(INPUT_POST,"userid",FILTER_SANITIZE_NUMBER_INT);
 		if (sizeof($setCol)==0)throw new Exception("No data Set");

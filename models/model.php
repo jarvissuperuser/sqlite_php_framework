@@ -78,8 +78,7 @@ class BaseModel {
 			$arr[$d] = "";
 	}
 	
-	protected function silence($arr){
-		$newArray = [];
+	protected function silence($newArray,$arr){
 		foreach($arr as $d){
 			$val = true;
 			foreach($this->silenced as $m){
