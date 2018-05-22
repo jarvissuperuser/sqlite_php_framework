@@ -84,7 +84,7 @@ class User extends BaseModel
 		$limit = Controller::input("limit",10,FILTER_SANITIZE_NUMBER_INT);
 		$what = "(fullname LIKE '%$p%') AND type='$tp' ";
 		$data = $this->get_from_db($what, $start, $limit,2);
-		$this->mute($data);
+		$data = $this->mute($data);
 		echo json_encode($data);
 	}
 
