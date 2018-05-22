@@ -20,6 +20,10 @@ class BaseModel {
 	public $cols;
 
 	/**
+	 * @var array
+	 */
+	public $muted;
+	/**
 	 * @var QueryBuild
 	 */
 	public $db;
@@ -64,5 +68,24 @@ class BaseModel {
 		$qry = $db->slct($selection, $tbl, $what);
 		$st = $db->db->query($qry);
 		return [$st->fetchObject()->c,$st];
+	}
+	
+	protected function mute(&$arr){
+		foreach($this->muted as $d)
+			$arr[$d] = "";
+	}
+	
+	protected function silence($arr){
+		$newArray = [];
+		foreach($arr as $d){
+			$val = true;
+			foreach($this->muted as $m){
+				if ($m == $d){
+					$val = false;
+					break;
+				}
+			}
+			if ($val) array_push($newArray,$d);
+		}
 	}
 }
