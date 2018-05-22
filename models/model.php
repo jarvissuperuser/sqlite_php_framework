@@ -72,7 +72,7 @@ class BaseModel {
 	
 	protected function mute(&$arr){
 		foreach($this->muted as $d)
-			$a[$d] = "";
+			$arr[$d] = "";
 	}
 	
 	protected function silence($arr){
