@@ -18,7 +18,10 @@ class BaseModel {
 	 * @var array
 	 */
 	public $cols;
-
+	/**
+	 * @var array
+	 */
+	public $silinced;
 	/**
 	 * @var array
 	 */
@@ -79,7 +82,7 @@ class BaseModel {
 		$newArray = [];
 		foreach($arr as $d){
 			$val = true;
-			foreach($this->muted as $m){
+			foreach($this->silenced as $m){
 				if ($m == $d){
 					$val = false;
 					break;
@@ -87,5 +90,6 @@ class BaseModel {
 			}
 			if ($val) array_push($newArray,$d);
 		}
+		return $newArray;
 	}
 }

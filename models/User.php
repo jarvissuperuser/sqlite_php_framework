@@ -19,6 +19,7 @@ class User extends BaseModel
 			["uid","date_of_birth","national_id",
 			"nationality","gender","flag","cell","tel","email","password"]];
 		$this->muted = ["cell","pass_key","tel","email","national_id"];
+		$this->silenced = ["password","email"];
 	}
 	public function add()
 	{
