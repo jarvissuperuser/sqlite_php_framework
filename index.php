@@ -50,6 +50,6 @@ catch (Exception $exc){
 			echo json_encode(["Error"=>$exc->getTraceAsString()]);
 			break;
 		default:
-			echo json_encode(["Error"=>$exc->getMessage();
+			echo json_encode(["Error"=>$exc->getMessage()];
 	}
 }
