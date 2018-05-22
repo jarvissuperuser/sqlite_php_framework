@@ -70,11 +70,9 @@ class BaseModel {
 		return [$st->fetchObject()->c,$st];
 	}
 	
-	protected function mute($arr){
-		foreach ($arr as $a)
-			foreach($this->muted as $d)
-				$a[$d] = "";
-		return $arr;
+	protected function mute(&$arr){
+		foreach($this->muted as $d)
+			$a[$d] = "";
 	}
 	
 	protected function silence($arr){
