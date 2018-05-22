@@ -23,7 +23,7 @@ try
 			$u->get();
 			break;
 		case "add_profile":
-			$p->app();
+			$p->add();
 			break;
 		case "get_profile":
 			$p->get();
