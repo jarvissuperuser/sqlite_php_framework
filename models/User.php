@@ -25,10 +25,12 @@ class User extends BaseModel
 	{
 		// TODO: test Cases
 		$db = $this->db;
-		$user_reg = $this->record_check(1,["email"]);
-		if ($user_reg[0]>0) throw new Exception("User Exists");
 		$vls = Controller::valuate([],$this->cols[0]);
 		$vls2 = Controller::valuate([],$this->cols[1]);
+		$aut = BaseFilter::auth($vls[3]);
+		 throw new Exception("Not Auth " + json_encode([$aut]));
+		$user_reg = $this->record_check(1,["email"]);
+		if ($user_reg[0]>0) throw new Exception("User Exists");
 		$vls2[sizeof($vls2) - 1] = hash("SHA256", filter_input(INPUT_POST,"password",
 			FILTER_SANITIZE_SPECIAL_CHARS));
 		if ($this->add_to_db($vls,0)) {

@@ -6,12 +6,13 @@
  * Time: 3:10 PM
  */
 require_once "init.php";
-
+BaseFilter::start();
 try 
 {
 	$db = new QueryBuild();
 	$u = new User($db);
 	$p = new Profile($db);
+	
 	switch (trim(filter_input(INPUT_POST, "submit"))) {
 		case "add_user":
 			$u->add();
