@@ -41,7 +41,7 @@ catch (PDOException $pe){
 			echo json_encode(["Error"=>$pe->getTraceAsString(),$pe->getTrace()]);
 			break;
 		default:
-			echo json_encode(["Error"=>"Request Failed","success":false]);
+			echo json_encode(["Error"=>"Request Failed","success"=>false]);
 	}
 } 
 catch (Exception $exc){
@@ -50,6 +50,6 @@ catch (Exception $exc){
 			echo json_encode(["Error"=>$exc->getTraceAsString()]);
 			break;
 		default:
-			echo json_encode(["Error"=>$exc->getMessage(),"success":false]);
+			echo json_encode(["Error"=>$exc->getMessage(),"success"=>false]);
 	}
 }
