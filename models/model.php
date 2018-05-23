@@ -66,11 +66,26 @@ class BaseModel {
 		$db = $this->db;
 		$selection = "count(*) as c";
 		$tbl = $this->tbls[$pointer];//table to query
-		$email = filter_input(INPUT_POST,"$target",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-		$what = "$target='$email'";//or phone='$phone'";
+		//$email = filter_input(INPUT_POST,"$target",FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+		//$what = "$target='$email'";//or phone='$phone'";
+		$what = $this->multi_builder($target);
 		$qry = $db->slct($selection, $tbl, $what);
+		//throw new Exception($qry);
 		$st = $db->db->query($qry);
 		return [$st->fetchObject()->c,$st];
+	}
+
+	protected function multi_builder($target){
+		$values = [];
+		foreach ($target as $tar){
+			array_push($values,Controller::input($tar,"",
+			FILTER_SANITIZE_FULL_SPECIAL_CHARS));
+		}
+		$str = "{$target[0]}='{$values[0]}'";
+		for($c = 1;$c < sizeof($values);$c++){
+			$str.=" AND {$target[$c]}='{$values[$c]}'";
+		}
+		return $str;
 	}
 	
 	protected function mute(&$arr){

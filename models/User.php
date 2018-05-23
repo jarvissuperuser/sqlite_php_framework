@@ -25,7 +25,7 @@ class User extends BaseModel
 	{
 		// TODO: test Cases
 		$db = $this->db;
-		$user_reg = $this->record_check(1,"email");
+		$user_reg = $this->record_check(1,["email"]);
 		if ($user_reg[0]>0) throw new Exception("User Exists");
 		$vls = Controller::valuate([],$this->cols[0]);
 		$vls2 = Controller::valuate([],$this->cols[1]);
