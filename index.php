@@ -7,6 +7,7 @@
  */
 require_once "init.php";
 BaseFilter::start();
+//BaseFilter::init();
 try 
 {
 	$db = new QueryBuild();
@@ -48,7 +49,7 @@ catch (PDOException $pe){
 catch (Exception $exc){
 	switch(trim(filter_input(INPUT_POST,"debug"))){
 		case '1':
-			echo json_encode(["Error"=>$exc->getTraceAsString(),$pe->getTrace()]);
+			echo json_encode(["Error"=>$exc->getTraceAsString(),$exc->getTrace()]);
 			break;
 		default:
 			echo json_encode(["Error"=>$exc->getMessage(),"success"=>false]);

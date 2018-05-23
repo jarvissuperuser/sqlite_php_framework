@@ -28,7 +28,7 @@ class User extends BaseModel
 		$vls = Controller::valuate([],$this->cols[0]);
 		$vls2 = Controller::valuate([],$this->cols[1]);
 		$aut = BaseFilter::auth($vls[3]);
-		 throw new Exception("Not Auth " + json_encode([$aut]));
+		if($aut)throw new Exception("Operation is Not Allowed for user");
 		$user_reg = $this->record_check(1,["email"]);
 		if ($user_reg[0]>0) throw new Exception("User Exists");
 		$vls2[sizeof($vls2) - 1] = hash("SHA256", filter_input(INPUT_POST,"password",

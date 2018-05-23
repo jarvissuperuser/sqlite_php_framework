@@ -46,13 +46,10 @@ class BaseFilter extends BaseModel{
 		$this->user_device = filter_input(INPUT_SERVER,"HTTP_USER_AGENT");
 	}
 	public static function auth($level_key){
-		
 		$level = BaseFilter::get_level($level_key);
 		$user_level = BaseFilter::get_level(
 			filter_input(INPUT_SESSION,"user_privilege"));
-	
-		
-		return ($user_level<$level);
+		return ($user_level>$level);
 	}
 	private function lock_key($str){
 		$str1=base64_encode($str);
@@ -68,8 +65,8 @@ class BaseFilter extends BaseModel{
 		return hash("SHA256",filter_input(INPUT_POST,"password"));
 	}
 	public static function get_level($key){
-		for($l = 0;$l< count(BaseFilter::auth_rules);$l++)
-			if(BaseFilter::auth_rules[$l] == $key)
+		for($l = 0;$l< count(BaseFilter::$auth_rules);$l++)
+			if(BaseFilter::$auth_rules[$l] == $key)
 				 return $l;
 		return 5;
 	}

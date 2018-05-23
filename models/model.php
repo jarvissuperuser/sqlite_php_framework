@@ -9,6 +9,7 @@
 class BaseModel {
 
 
+	private function __construct(){}
 	/**
 	 * @var array
 	 */
