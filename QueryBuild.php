@@ -75,7 +75,7 @@ class QueryBuild
     // TODO: implement here
     $this->setdsn1();
     if (!file_exists("ready.x")) {
-      $this->db = new PDO($this->dsn0, base64_decode($this->user), base64_decode($this->pwd));
+      $this->db = new PDO($this->dsn0);//, base64_decode($this->user), base64_decode($this->pwd));
       $this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       $sql = file_get_contents('smart.sql');
       $this->db->exec($sql);
@@ -83,7 +83,7 @@ class QueryBuild
       fwrite($fil, $this->db->errorcode());
       fclose($fil);
     }
-    $this->db = new PDO($this->dsn1, base64_decode($this->user), base64_decode($this->pwd));
+    $this->db = new PDO($this->dsn1);//, base64_decode($this->user), base64_decode($this->pwd));
 		$this->db->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
   }
 
