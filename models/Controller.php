@@ -57,5 +57,41 @@ class Controller
 		filter_input(INPUT_POST,$var,$type)!=null)
 		?filter_input(INPUT_POST,$var,$type):$default;
 	}
+	/**
+	 * @param User $u;
+	 * 
+	*/
+	public static function process_users($u){
+		switch (trim(filter_input(INPUT_POST, "submit"))){
+			case "add_user":
+				$u->add();
+				break ;
+			case "update_user":
+				$u->update_all();
+				break ;			
+			case "search_user":
+				$u->search();
+				break ;
+			case "get_user":
+				$u->get();
+				break ;
+		}
+	}
+	public static function process_profiles($p){
+		switch (trim(filter_input(INPUT_POST, "submit"))){
+			case "add_profile":
+				$p->add();
+				break ;
+			case "update_profile":
+				$p->update_all();
+				break ;			
+			case "search_profile":
+				$p->search();
+				break ;
+			case "get_profile":
+				$p->get();
+				break ;
+		}
+	}
 
 }
