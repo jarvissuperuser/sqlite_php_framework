@@ -58,7 +58,7 @@ class Controller
 		?filter_input(INPUT_POST,$var,$type):$default;
 	}
 	/**
-	 * @param User $u;
+	 * @param  $u ;
 	 * 
 	*/
 	public static function process_users($u){

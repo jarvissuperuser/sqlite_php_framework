@@ -20,7 +20,7 @@ class QueryBuild
       $this->init();
     } catch (Exception $e) {
       $this->db = null;
-      echo json_encode([$e,$e->getTraceAsString()]);
+      die(json_encode([$e,$e->getTraceAsString()]));
       //error_log($e);
     }
   }
